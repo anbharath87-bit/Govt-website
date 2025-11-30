@@ -3,23 +3,39 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Karnataka Govt Facilities (Official Links)</title>
+  <title>Karnataka Govt Facilities (Updated)</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="site-header">
-    <div class="wrap">
-      <h1>Karnataka Govt — Facilities (Official Links)</h1>
+    <div class="wrap header-inner">
+      <div class="logo-wrap">
+        <img id="site-logo" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Funiversitykart.com%2Funiversity%2Funiversitydetails%2Fmalnad-college-of-engineering-hassan&psig=AOvVaw1dK11taiGkTHxICAdmnauJ&ust=1764615913332000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNjY3dvImpEDFQAAAAAdAAAAABAE" alt="Site Logo">
+        <h1>Karnataka Govt — Facilities</h1>
+      </div>
+      <div class="header-banner">
+        <img id="site-banner" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.mcehassan.ac.in%2Fassets%2Ffiles%2FGoverning%2520bodies%2FBoG%2520Members%2520Profile%2520for%2520Website.pdf&psig=AOvVaw1dK11taiGkTHxICAdmnauJ&ust=1764615913332000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNjY3dvImpEDFQAAAAAdAAAAABAL" alt="Header Banner">
+      </div>
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap main-grid">
     <section class="section">
       <h2>Newly Launched (Carousel)</h2>
+
       <div class="carousel">
         <button class="carousel-btn" id="prev" aria-label="Previous">‹</button>
+
+        <!-- Larger track -->
         <div class="carousel-track" id="carousel-track" tabindex="0" aria-live="polite"></div>
+
         <button class="carousel-btn" id="next" aria-label="Next">›</button>
+      </div>
+
+      <!-- Past icons moved below carousel -->
+      <div class="section past-icons-section">
+        <h3>Past Facilities</h3>
+        <div id="past-icons" class="past-icons"></div>
       </div>
     </section>
 
@@ -27,11 +43,6 @@
       <h2>All Facilities</h2>
       <div id="grid" class="grid"></div>
     </section>
-
-    <aside class="section past">
-      <h2>Past Launches</h2>
-      <div id="past-list" class="past-list"></div>
-    </aside>
   </main>
 
   <!-- Modal popup -->
