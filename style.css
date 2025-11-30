@@ -5,43 +5,165 @@
   --muted:#666;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,Arial,sans-serif; background:var(--bg); color:#111}
-.wrap{max-width:1100px;margin:0 auto;padding:18px}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter,system-ui,Arial,sans-serif;
+  background:var(--bg);
+  color:#111;
+}
+
+/* center page content */
+.wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:12px;      /* small page padding for breathing room */
+}
 
 /* header */
-.site-header{background:linear-gradient(90deg,#08306b,#0b66d4);color:#fff;padding:12px 0;margin-bottom:12px}
-.header-inner{display:flex;align-items:left;justify-content:space-between;gap:12px}
-.logo-wrap{display:flex;align-items:left;gap:12px}
-.logo-wrap h1{margin:0;font-size:20px}
-#site-logo{width:72px;height:72px;object-fit:cover;border-radius:8px;border:2px solid rgba(255,255,255,.12);background:#fff}
-.header-banner img{height:64px;object-fit:contain;border-radius:6px;border:2px solid rgba(255,255,255,.08);background:#fff;padding:6px}
+.site-header{
+  background:linear-gradient(90deg,#08306b,#0b66d4);
+  color:#fff;
+  padding:10px 0;
+  margin-bottom:12px;
+}
+
+/* use wrap inside header to center content */
+.header-inner{
+  display:flex;
+  align-items:center;          /* was invalid 'left' previously */
+  justify-content:space-between;
+  gap:12px;
+}
+
+/* left side: emblem + title */
+.logo-wrap{
+  display:flex;
+  align-items:center;          /* center the logo vertically with the title */
+  gap:12px;
+}
+.logo-wrap h1{
+  margin:0;
+  font-size:20px;
+  font-weight:600;
+}
+
+/* emblem/logo */
+#site-logo{
+  width:72px;
+  height:72px;
+  object-fit:cover;
+  border-radius:8px;
+  border:2px solid rgba(255,255,255,.12);
+  background:#fff;
+}
+
+/* right banner/logo */
+.header-banner img{
+  height:64px;
+  object-fit:contain;
+  border-radius:6px;
+  border:2px solid rgba(255,255,255,.08);
+  background:#fff;
+  padding:6px;
+}
 
 /* sections */
-.section{margin-bottom:18px}
-.section h2{margin:0 0 10px 0;font-size:18px}
-.section h3{margin:10px 0 8px}
+.section{margin-bottom:14px}
+.section h2{margin:0 0 8px 0;font-size:18px}
+.section h3{margin:8px 0 6px}
 
-/* carousel (bigger) */
-.carousel{display:flex;align-items:center;gap:8px}
+/* ---------- Carousel (bigger, centered) ---------- */
+
+/* container that centers the carousel inside the .wrap */
+.carousel-container{
+  width:100%;
+  max-width:1100px;
+  margin: 8px auto;    /* centers the whole carousel */
+  position:relative;
+  padding:0;
+}
+
+/* main carousel row (arrows + track) */
+.carousel{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+/* track that holds slides; use full width and show one slide at a time */
 .carousel-track{
   display:flex;
   gap:16px;
-  overflow-x:auto;
+  overflow:hidden;            /* hide overflow so only one big card shows */
   padding:12px;
   border-radius:8px;
-  flex:1;
   scroll-behavior:smooth;
   align-items:center;
-  /* larger visual size */
-  height:320px;
-  background:linear-gradient(180deg, rgba(255,255,255,.9), rgba(250,250,255,.95));
+  width:100%;
+  height:320px;              /* visual height for large card */
+  background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(250,250,255,.98));
   border:1px solid #e6eefc;
+  box-sizing:border-box;
 }
-.carousel-track::-webkit-scrollbar{height:12px}
-.carousel-track img{display:block;border-radius:10px;min-width:420px;height:100%;object-fit:cover;cursor:pointer;box-shadow:0 6px 24px rgba(2,6,23,.12)}
-.carousel-btn{background:#fff;border:1px solid #ddd;padding:10px 12px;border-radius:8px;cursor:pointer;font-size:20px;align-self:center;box-shadow:0 2px 8px rgba(2,6,23,.06)}
 
-/* past icons (below carousel) */
+/* each slide should be full width of the track (one visible at a time) */
+.carousel-slide{
+  min-width:100%;
+  height:100%;
+  border-radius:10px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 6px 24px rgba(2,6,23,.08);
+  background:var(--card);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* image inside slide covers the area */
+.carousel-slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* optional overlay content inside slide */
+.slide-content{
+  position:absolute;
+  left:20px;
+  bottom:20px;
+  background:rgba(0,0,0,0.45);
+  color:#fff;
+  padding:10px 14px;
+  border-radius:8px;
+}
+
+/* arrows */
+.carousel-btn{
+  background:#fff;
+  border:1px solid #ddd;
+  padding:10px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:20px;
+  align-self:center;
+  box-shadow:0 2px 8px rgba(2,6,23,.06);
+}
+
+/* make prev/next positioned (optional: style in HTML accordingly) */
+.carousel-btn.left{order:0}
+.carousel-btn.right{order:2}
+
+/* smaller view adjustments */
+@media (max-width:999px){
+  .header-banner img{height:48px}
+  #site-logo{width:56px;height:56px}
+  .carousel-track{height:220px}
+}
+
+/* ---------- Past icons (below carousel) ---------- */
 .past-icons-section{margin-top:12px}
 .past-icons{display:flex;gap:12px;flex-wrap:wrap}
 .past-icon{
@@ -54,7 +176,7 @@ body{margin:0;font-family:Inter,system-ui,Arial,sans-serif; background:var(--bg)
 }
 .past-icon small{display:block;color:var(--muted);font-size:13px}
 
-/* grid */
+/* ---------- grid (all facilities) ---------- */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
 .card{background:var(--card);border-radius:8px;overflow:hidden;cursor:pointer;box-shadow:0 6px 18px rgba(11,102,212,.06);transition:transform .12s}
 .card:hover{transform:translateY(-4px)}
@@ -77,13 +199,8 @@ body{margin:0;font-family:Inter,system-ui,Arial,sans-serif; background:var(--bg)
 /* about full text */
 .about-full{margin-top:12px;background:#fafbfd;padding:12px;border-radius:8px;border:1px solid #eef3ff}
 
-/* responsive */
+/* small responsive adjustments for layout */
 @media (min-width:1000px){
-  .wrap{display:grid;grid-template-columns:1fr;gap:18px}
-}
-@media (max-width:999px){
-  .header-banner img{height:48px}
-  #site-logo{width:56px;height:56px}
-  .carousel-track{height:220px}
-  .carousel-track img{min-width:300px}
+  /* keep the wrap grid behaviour only if you add a two-col layout later */
+  .wrap{display:block}
 }
