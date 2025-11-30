@@ -10,8 +10,8 @@ body{margin:0;font-family:Inter,system-ui,Arial,sans-serif; background:var(--bg)
 
 /* header */
 .site-header{background:linear-gradient(90deg,#08306b,#0b66d4);color:#fff;padding:12px 0;margin-bottom:12px}
-.header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.logo-wrap{display:flex;align-items:center;gap:12px}
+.header-inner{display:flex;align-items:left;justify-content:space-between;gap:12px}
+.logo-wrap{display:flex;align-items:left;gap:12px}
 .logo-wrap h1{margin:0;font-size:20px}
 #site-logo{width:72px;height:72px;object-fit:cover;border-radius:8px;border:2px solid rgba(255,255,255,.12);background:#fff}
 .header-banner img{height:64px;object-fit:contain;border-radius:6px;border:2px solid rgba(255,255,255,.08);background:#fff;padding:6px}
