@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Karnataka Facilities — Simple</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<header>
+<h1>Karnataka Govt — Facilities</h1>
+</header>
+
+
+<section class="carousel">
+<h2>Newly Launched</h2>
+<div id="carousel" class="carousel-track"></div>
+</section>
+
+
+<main>
+<h2>All Facilities</h2>
+<div id="grid" class="grid"></div>
+</main>
+
+
+<div id="modal" class="modal hidden">
+<div class="modal-box">
+<button id="close">Close</button>
+<img id="mimg" src="" alt="img">
+<h3 id="mtitle"></h3>
+<p id="mdesc"></p>
+<div class="actions">
+<button id="about">About</button>
+<a id="apply" href="#" target="_blank">Visit to Apply</a>
+</div>
+</div>
+</div>
+
+
+<script>
+// simple fetch and render
+async function init(){
+const res = await fetch('/facilities');
+const data = await res.json();
+const grid = document.getElementById('grid');
+const carousel = document.getElementById('carousel');
+
+
+data.all.forEach(item=>{
+const card = document.createElement('div'); card.className='card';
+const img = document.createElement('img'); img.src=item.image; img.alt=item.name; img.onclick = ()=>open(item);
+const title = document.createElement('div'); title.className='title'; title.innerText=item.name;
+card.appendChild(img); card.appendChild(title);
+grid.appendChild(card);
+});
+
+
+data.newly_launched.forEach(item=>{
+const el = document.createElement('img'); el.src=item.image; el.alt=item.name; el.className='small'; el.onclick = ()=>open(item);
+carousel.appendChild(el);
+});
+}
+
+
+function open(item){
+document.getElementById('mimg').src = item.image;
+document.getElementById('mtitle').innerText = item.name;
+document.getElementById('mdesc').innerText = item.short;
+document.getElementById('apply').href = item.apply_url || '#';
+document.getElementById('modal').classList.remove('hidden');
+}
+
+
+document.getElementById('close').addEventListener('click', ()=> document.getElementById('modal').classList.add('hidden'));
+
+
+init();
+</script>
+</body>
+</html>
