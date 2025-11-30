@@ -101,7 +101,7 @@ body{
   scroll-behavior:smooth;
   align-items:center;
   width:100%;
-  height:320px;              /* visual height for large card */
+  height:200px;              /* visual height for large card */
   background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(250,250,255,.98));
   border:1px solid #e6eefc;
   box-sizing:border-box;
