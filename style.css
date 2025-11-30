@@ -77,7 +77,7 @@ body{
 
 /* container that centers the carousel inside the .wrap */
 .carousel-container{
-  width:100%;
+  width:80%;
   max-width:1100px;
   margin: 8px auto;    /* centers the whole carousel */
   position:relative;
