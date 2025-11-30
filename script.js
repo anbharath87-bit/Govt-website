@@ -1,41 +1,41 @@
-// script.js
+// updated script.js
 const FACILITIES = [
   {
     id: 1,
     name: "Seva Sindhu (All-services Portal)",
     short: "Central Karnataka portal to apply for many state services & check status.",
     about: "Seva Sindhu is the unified citizen services portal for Karnataka — you can register, apply and check status for multiple state services.",
-    image: "https://via.placeholder.com/640x400?text=Seva+Sindhu",
+    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.districtsinfo.com%2F2020%2F11%2Farogya-karnataka-scheme-how-to-apply.html&psig=AOvVaw2GgfuXBMQzZ3JMw59gD_7s&ust=1764615605081000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCMDsp8XHmpEDFQAAAAAdAAAAABAE",
     apply_url: "https://sevasindhu.karnataka.gov.in/Sevasindhu/English",
     category: "new",
     launch_date: "2025-01-01"
   },
   {
     id: 2,
-    name: "Arogya Karnataka / AB-ARK (Health Scheme)",
+    name: "Arogya Karnataka",
     short: "State health scheme providing universal coverage and cashless treatment.",
-    about: "Arogya Karnataka (Ayushman Bharat - Arogya Karnataka) provides health coverage and treatment support to eligible residents of Karnataka.",
-    image: "https://via.placeholder.com/640x400?text=Arogya+Karnataka",
+    about: "Arogya Karnataka provides health coverage and cashless treatment to eligible residents of Karnataka.",
+    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.digitalindiagov.in%2Ftag%2Fbhoomi-rtc%2F&psig=AOvVaw2cFSio4WVc883KBrcXy0dN&ust=1764615644463000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNjOmdrHmpEDFQAAAAAdAAAAABAE",
     apply_url: "https://arogya.karnataka.gov.in/",
     category: "new",
     launch_date: "2024-10-15"
   },
   {
     id: 3,
-    name: "Bhoomi (Land Records / RTC)",
+    name: "Bhoomi (Land Records)",
     short: "Online land records (RTC / Pahani) and mutation services.",
     about: "Bhoomi / landrecords portal allows citizens to view Pahani, RTC, mutation status and related land services for Karnataka.",
-    image: "https://via.placeholder.com/640x400?text=Bhoomi+Land+Records",
+    image: "https://via.placeholder.com/1200x720?text=Bhoomi+Land+Records",
     apply_url: "https://landrecords.karnataka.gov.in/",
     category: "past",
     launch_date: "2023-06-15"
   },
   {
     id: 4,
-    name: "Gruha Jyothi (Domestic Electricity Benefit)",
-    short: "Electricity subsidy / free units for eligible domestic households (state scheme info via Seva Sindhu).",
-    about: "Gruha Jyothi provides electricity subsidy / free units for eligible households; registration and details are available via Seva Sindhu and CESCMysore references.",
-    image: "https://via.placeholder.com/640x400?text=Gruha+Jyothi",
+    name: "Gruha Jyothi",
+    short: "Domestic electricity subsidy and benefits.",
+    about: "Gruha Jyothi provides electricity subsidy / free units for eligible households; registration and details are available via Seva Sindhu.",
+    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fhousing.com%2Fnews%2Fall-about-karnatakas-gruha-jyothi-scheme%2F&psig=AOvVaw1LPGnIH6N7eJnM_Dqv4VBE&ust=1764615677375000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCKCMqufHmpEDFQAAAAAdAAAAABAE",
     apply_url: "https://sevasindhu.karnataka.gov.in/",
     category: "past",
     launch_date: "2023-12-01"
@@ -43,21 +43,22 @@ const FACILITIES = [
   {
     id: 5,
     name: "Kaushalya / Skill Development",
-    short: "State skill development programs and courses (Kaushalya portals).",
-    about: "Kaushalya Karnataka and related skill development programs offer vocational training, certification and placement support across the state.",
-    image: "https://via.placeholder.com/640x400?text=Kaushalya+Skill+Karnataka",
+    short: "State skill development programs and courses.",
+    about: "Kaushalya Karnataka and related programs offer vocational training, certification and placement support across the state.",
+    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nextias.com%2Fblog%2Fgrameen-kaushalya-yojana-ddu-gky%2F&psig=AOvVaw2Tl1DizjT3dG_6hGZjMFSe&ust=1764615720664000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCMjaif_HmpEDFQAAAAAdAAAAABAE",
     apply_url: "https://kaushalya.karnataka.gov.in/en",
     category: "new",
     launch_date: "2025-09-20"
   }
 ];
 
-// ---------- Rendering (same as earlier) ----------
+// ---------- Rendering ----------
 const gridEl = document.getElementById('grid');
 const carouselTrack = document.getElementById('carousel-track');
-const pastList = document.getElementById('past-list');
+const pastIconsEl = document.getElementById('past-icons');
 
 function renderAll() {
+  // Grid
   gridEl.innerHTML = '';
   FACILITIES.forEach(item => {
     const card = document.createElement('div');
@@ -73,6 +74,7 @@ function renderAll() {
     gridEl.appendChild(card);
   });
 
+  // Carousel (newly launched)
   carouselTrack.innerHTML = '';
   const newItems = FACILITIES.filter(f => f.category === 'new');
   newItems.forEach(item => {
@@ -85,25 +87,22 @@ function renderAll() {
     carouselTrack.appendChild(img);
   });
 
-  pastList.innerHTML = '';
+  // Past icons (below carousel)
+  pastIconsEl.innerHTML = '';
   const past = FACILITIES.filter(f => f.category === 'past').sort((a,b)=> (b.launch_date || '').localeCompare(a.launch_date || ''));
   past.forEach(item => {
-    const row = document.createElement('div');
-    row.className = 'past-row';
-    row.innerHTML = `
+    const wrap = document.createElement('div');
+    wrap.className = 'past-icon';
+    wrap.innerHTML = `
       <img src="${item.image}" alt="${escapeHtml(item.name)}">
-      <div class="info">
-        <strong>${escapeHtml(item.name)}</strong>
-        <p>${escapeHtml(item.short)}</p>
-        <small>Launched: ${escapeHtml(item.launch_date || '—')}</small>
-      </div>
+      <small>${escapeHtml(item.name)}</small>
     `;
-    row.addEventListener('click', () => openModal(item));
-    pastList.appendChild(row);
+    wrap.addEventListener('click', () => openModal(item));
+    pastIconsEl.appendChild(wrap);
   });
 }
 
-// ---------- Modal ----------
+// ---------- Modal logic ----------
 const modal = document.getElementById('modal');
 const modalImg = document.getElementById('modal-img');
 const modalTitle = document.getElementById('modal-title');
@@ -148,15 +147,46 @@ function closeModal() {
   currentItem = null;
 }
 
+// ---------- Carousel controls & auto-scroll ----------
 document.getElementById('prev').addEventListener('click', () => {
-  carouselTrack.scrollBy({left: -280, behavior: 'smooth'});
+  carouselTrack.scrollBy({left: -420, behavior: 'smooth'});
 });
 document.getElementById('next').addEventListener('click', () => {
-  carouselTrack.scrollBy({left: 280, behavior: 'smooth'});
+  carouselTrack.scrollBy({left: 420, behavior: 'smooth'});
 });
 
+// Auto-scroll interval
+let autoScrollTimer = null;
+function startAutoScroll(){
+  stopAutoScroll();
+  autoScrollTimer = setInterval(()=> {
+    // scroll by one visible card width
+    carouselTrack.scrollBy({left: 440, behavior: 'smooth'});
+    // if near the end, jump to start (smooth jump)
+    const maxScroll = carouselTrack.scrollWidth - carouselTrack.clientWidth;
+    if (carouselTrack.scrollLeft + 450 >= maxScroll){
+      // small timeout to allow smooth to finish then go to start
+      setTimeout(()=> carouselTrack.scrollTo({left:0, behavior:'smooth'}), 600);
+    }
+  }, 3000); // every 3s
+}
+function stopAutoScroll(){
+  if(autoScrollTimer) { clearInterval(autoScrollTimer); autoScrollTimer = null; }
+}
+
+// Pause on hover / focus
+carouselTrack.addEventListener('mouseenter', stopAutoScroll);
+carouselTrack.addEventListener('mouseleave', startAutoScroll);
+carouselTrack.addEventListener('focusin', stopAutoScroll);
+carouselTrack.addEventListener('focusout', startAutoScroll);
+
+// ---------- small helpers ----------
 function escapeHtml(text){
   return String(text).replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
 
-window.addEventListener('load', renderAll);
+window.addEventListener('load', () => {
+  renderAll();
+  // small delay before starting auto scroll so initial render stabilizes
+  setTimeout(startAutoScroll, 800);
+});
