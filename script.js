@@ -2,17 +2,17 @@
 const slidesData = [
     {
         title: "Seva Sindhu Portal",
-        img: "",
+        img: "images/Seva_Sindhu_-_Online_Registration_and_Services_Portal_corpseed.webp",
         link: "https://sevasindhu.karnataka.gov.in/Sevasindhu/English"
     },
     {
-        title: "Karnataka Indira Canteen",
-        img: "https://cdn.siasat.com/wp-content/uploads/2021/08/indira-canteen.jpg",
+        title: "Arogya Karnataka",
+        img: "images/arogya karanataka scheme.jpg",
         link: "https://ksdb.karnataka.gov.in/"
     },
     {
         title: "Bhoomi Online Land Records",
-        img: "https://bhoomi.karnataka.gov.in/images/home_banner.jpg",
+        img: "images/RTC-Bhoomi-Karnataka.jpg",
         link: "https://bhoomi.karnataka.gov.in/"
     }
 ];
