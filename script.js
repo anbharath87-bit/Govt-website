@@ -1,192 +1,73 @@
-// updated script.js
-const FACILITIES = [
-  {
-    id: 1,
-    name: "Seva Sindhu (All-services Portal)",
-    short: "Central Karnataka portal to apply for many state services & check status.",
-    about: "Seva Sindhu is the unified citizen services portal for Karnataka — you can register, apply and check status for multiple state services.",
-    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.districtsinfo.com%2F2020%2F11%2Farogya-karnataka-scheme-how-to-apply.html&psig=AOvVaw2GgfuXBMQzZ3JMw59gD_7s&ust=1764615605081000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCMDsp8XHmpEDFQAAAAAdAAAAABAE",
-    apply_url: "https://sevasindhu.karnataka.gov.in/Sevasindhu/English",
-    category: "new",
-    launch_date: "2025-01-01"
-  },
-  {
-    id: 2,
-    name: "Arogya Karnataka",
-    short: "State health scheme providing universal coverage and cashless treatment.",
-    about: "Arogya Karnataka provides health coverage and cashless treatment to eligible residents of Karnataka.",
-    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.digitalindiagov.in%2Ftag%2Fbhoomi-rtc%2F&psig=AOvVaw2cFSio4WVc883KBrcXy0dN&ust=1764615644463000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNjOmdrHmpEDFQAAAAAdAAAAABAE",
-    apply_url: "https://arogya.karnataka.gov.in/",
-    category: "new",
-    launch_date: "2024-10-15"
-  },
-  {
-    id: 3,
-    name: "Bhoomi (Land Records)",
-    short: "Online land records (RTC / Pahani) and mutation services.",
-    about: "Bhoomi / landrecords portal allows citizens to view Pahani, RTC, mutation status and related land services for Karnataka.",
-    image: "https://via.placeholder.com/1200x720?text=Bhoomi+Land+Records",
-    apply_url: "https://landrecords.karnataka.gov.in/",
-    category: "past",
-    launch_date: "2023-06-15"
-  },
-  {
-    id: 4,
-    name: "Gruha Jyothi",
-    short: "Domestic electricity subsidy and benefits.",
-    about: "Gruha Jyothi provides electricity subsidy / free units for eligible households; registration and details are available via Seva Sindhu.",
-    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fhousing.com%2Fnews%2Fall-about-karnatakas-gruha-jyothi-scheme%2F&psig=AOvVaw1LPGnIH6N7eJnM_Dqv4VBE&ust=1764615677375000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCKCMqufHmpEDFQAAAAAdAAAAABAE",
-    apply_url: "https://sevasindhu.karnataka.gov.in/",
-    category: "past",
-    launch_date: "2023-12-01"
-  },
-  {
-    id: 5,
-    name: "Kaushalya / Skill Development",
-    short: "State skill development programs and courses.",
-    about: "Kaushalya Karnataka and related programs offer vocational training, certification and placement support across the state.",
-    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nextias.com%2Fblog%2Fgrameen-kaushalya-yojana-ddu-gky%2F&psig=AOvVaw2Tl1DizjT3dG_6hGZjMFSe&ust=1764615720664000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCMjaif_HmpEDFQAAAAAdAAAAABAE",
-    apply_url: "https://kaushalya.karnataka.gov.in/en",
-    category: "new",
-    launch_date: "2025-09-20"
-  }
+// SAMPLE GOVERNMENT FACILITY SLIDES
+const slidesData = [
+    {
+        title: "Seva Sindhu Portal",
+        img: "",
+        link: "https://sevasindhu.karnataka.gov.in/Sevasindhu/English"
+    },
+    {
+        title: "Karnataka Indira Canteen",
+        img: "https://cdn.siasat.com/wp-content/uploads/2021/08/indira-canteen.jpg",
+        link: "https://ksdb.karnataka.gov.in/"
+    },
+    {
+        title: "Bhoomi Online Land Records",
+        img: "https://bhoomi.karnataka.gov.in/images/home_banner.jpg",
+        link: "https://bhoomi.karnataka.gov.in/"
+    }
 ];
 
-// ---------- Rendering ----------
-const gridEl = document.getElementById('grid');
-const carouselTrack = document.getElementById('carousel-track');
-const pastIconsEl = document.getElementById('past-icons');
+// Generate Slides
+const carousel = document.getElementById("carousel");
+const dotsContainer = document.getElementById("dots");
 
-function renderAll() {
-  // Grid
-  gridEl.innerHTML = '';
-  FACILITIES.forEach(item => {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-      <img loading="lazy" src="${item.image}" alt="${escapeHtml(item.name)}">
-      <div class="meta">
-        <h3>${escapeHtml(item.name)}</h3>
-        <p>${escapeHtml(item.short)}</p>
-      </div>
+slidesData.forEach((slide, index) => {
+    carousel.innerHTML += `
+        <div class="slide">
+            <img src="${slide.img}" alt="${slide.title}">
+            <div class="slide-content">
+                <h2>${slide.title}</h2>
+                <button class="cta-btn" onclick="window.open('${slide.link}', '_blank')">
+                    Visit to Apply
+                </button>
+            </div>
+        </div>
     `;
-    card.addEventListener('click', () => openModal(item));
-    gridEl.appendChild(card);
-  });
 
-  // Carousel (newly launched)
-  carouselTrack.innerHTML = '';
-  const newItems = FACILITIES.filter(f => f.category === 'new');
-  newItems.forEach(item => {
-    const img = document.createElement('img');
-    img.src = item.image;
-    img.alt = item.name;
-    img.className = 'carousel-item';
-    img.loading = 'lazy';
-    img.addEventListener('click', () => openModal(item));
-    carouselTrack.appendChild(img);
-  });
-
-  // Past icons (below carousel)
-  pastIconsEl.innerHTML = '';
-  const past = FACILITIES.filter(f => f.category === 'past').sort((a,b)=> (b.launch_date || '').localeCompare(a.launch_date || ''));
-  past.forEach(item => {
-    const wrap = document.createElement('div');
-    wrap.className = 'past-icon';
-    wrap.innerHTML = `
-      <img src="${item.image}" alt="${escapeHtml(item.name)}">
-      <small>${escapeHtml(item.name)}</small>
+    dotsContainer.innerHTML += `
+        <span class="dot" onclick="goToSlide(${index})"></span>
     `;
-    wrap.addEventListener('click', () => openModal(item));
-    pastIconsEl.appendChild(wrap);
-  });
-}
-
-// ---------- Modal logic ----------
-const modal = document.getElementById('modal');
-const modalImg = document.getElementById('modal-img');
-const modalTitle = document.getElementById('modal-title');
-const modalDesc = document.getElementById('modal-desc');
-const aboutBtn = document.getElementById('about-btn');
-const applyLink = document.getElementById('apply-link');
-const aboutFull = document.getElementById('about-full');
-const aboutText = document.getElementById('about-text');
-const modalClose = document.getElementById('modal-close');
-
-let currentItem = null;
-
-function openModal(item) {
-  currentItem = item;
-  modalImg.src = item.image;
-  modalImg.alt = item.name;
-  modalTitle.textContent = item.name;
-  modalDesc.textContent = item.short;
-  applyLink.href = item.apply_url || '#';
-  aboutFull.classList.add('hidden');
-  aboutText.textContent = item.about || 'No further details available.';
-  modal.classList.add('show');
-  modal.setAttribute('aria-hidden', 'false');
-  modalClose.focus();
-}
-
-aboutBtn.addEventListener('click', () => {
-  aboutFull.classList.toggle('hidden');
 });
 
-modalClose.addEventListener('click', closeModal);
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) closeModal();
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
-});
+let currentSlide = 0;
+const totalSlides = slidesData.length;
 
-function closeModal() {
-  modal.classList.remove('show');
-  modal.setAttribute('aria-hidden', 'true');
-  currentItem = null;
+function updateCarousel() {
+    carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+    document.querySelectorAll(".dot").forEach((dot, i) => {
+        dot.classList.toggle("active", i === currentSlide);
+    });
 }
 
-// ---------- Carousel controls & auto-scroll ----------
-document.getElementById('prev').addEventListener('click', () => {
-  carouselTrack.scrollBy({left: -420, behavior: 'smooth'});
-});
-document.getElementById('next').addEventListener('click', () => {
-  carouselTrack.scrollBy({left: 420, behavior: 'smooth'});
-});
-
-// Auto-scroll interval
-let autoScrollTimer = null;
-function startAutoScroll(){
-  stopAutoScroll();
-  autoScrollTimer = setInterval(()=> {
-    // scroll by one visible card width
-    carouselTrack.scrollBy({left: 440, behavior: 'smooth'});
-    // if near the end, jump to start (smooth jump)
-    const maxScroll = carouselTrack.scrollWidth - carouselTrack.clientWidth;
-    if (carouselTrack.scrollLeft + 450 >= maxScroll){
-      // small timeout to allow smooth to finish then go to start
-      setTimeout(()=> carouselTrack.scrollTo({left:0, behavior:'smooth'}), 600);
-    }
-  }, 3000); // every 3s
-}
-function stopAutoScroll(){
-  if(autoScrollTimer) { clearInterval(autoScrollTimer); autoScrollTimer = null; }
+// Next / Prev
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateCarousel();
 }
 
-// Pause on hover / focus
-carouselTrack.addEventListener('mouseenter', stopAutoScroll);
-carouselTrack.addEventListener('mouseleave', startAutoScroll);
-carouselTrack.addEventListener('focusin', stopAutoScroll);
-carouselTrack.addEventListener('focusout', startAutoScroll);
-
-// ---------- small helpers ----------
-function escapeHtml(text){
-  return String(text).replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateCarousel();
 }
 
-window.addEventListener('load', () => {
-  renderAll();
-  // small delay before starting auto scroll so initial render stabilizes
-  setTimeout(startAutoScroll, 800);
-});
+function goToSlide(n) {
+    currentSlide = n;
+    updateCarousel();
+}
+
+// Auto Scroll
+setInterval(nextSlide, 3500);
+
+// Init
+updateCarousel();
